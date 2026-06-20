@@ -1,0 +1,1037 @@
+<div id="physio-signup-root"></div>
+<style>
+  #physio-signup-root, #physio-signup-root * { box-sizing: border-box; }
+
+  #physio-signup-root {
+    --bg: #F5F7F2;
+    --card: #FFFFFF;
+    --ink: #1C2B26;
+    --ink-soft: #5B6B63;
+    --ink-faint: #8A968F;
+    --teal: #1E5048;
+    --teal-deep: #143832;
+    --teal-light: #DCE9E3;
+    --teal-line: #B7CFC6;
+    --coral: #E0703F;
+    --coral-deep: #B6532A;
+    --coral-light: #FBE2D2;
+    --coral-line: #F0BFA0;
+    --gold: #D9A441;
+    --border: #E2E7DE;
+    --danger: #C0492F;
+
+    font-family: 'Sarabun', sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    min-height: 100%;
+    padding: 28px 18px 60px;
+    line-height: 1.55;
+  }
+
+  #physio-signup-root .wrap { max-width: 980px; margin: 0 auto; }
+
+  #physio-signup-root .eyebrow {
+    font-family: 'Kanit', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: var(--teal);
+    font-weight: 600;
+    margin: 0 0 6px;
+    opacity: 0;
+    animation: psFadeUp .5s ease forwards;
+  }
+
+  #physio-signup-root h1 {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
+    font-size: clamp(28px, 4.2vw, 40px);
+    margin: 0 0 8px;
+    color: var(--teal-deep);
+    letter-spacing: -0.01em;
+    opacity: 0;
+    animation: psFadeUp .5s ease .06s forwards;
+  }
+
+  #physio-signup-root .subtitle {
+    color: var(--ink-soft);
+    font-size: 15.5px;
+    max-width: 660px;
+    margin: 0 0 16px;
+    opacity: 0;
+    animation: psFadeUp .5s ease .12s forwards;
+  }
+
+  @keyframes psFadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #physio-signup-root .eyebrow, #physio-signup-root h1, #physio-signup-root .subtitle,
+    #physio-signup-root .card { animation: none !important; opacity: 1 !important; transform: none !important; }
+  }
+
+  #physio-signup-root .workflow-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: var(--teal-light);
+    border: 1px solid var(--teal-line);
+    color: var(--teal-deep);
+    font-size: 13.5px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+  }
+  #physio-signup-root .workflow-note svg { flex-shrink: 0; margin-top: 2px; }
+  #physio-signup-root .workflow-note b { font-weight: 700; }
+
+  #physio-signup-root .top-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 18px;
+    align-items: stretch;
+  }
+  @media (max-width: 860px) {
+    #physio-signup-root .top-grid { grid-template-columns: 1fr; }
+  }
+
+  #physio-signup-root .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 22px 24px;
+    box-shadow: 0 1px 2px rgba(28,43,38,0.04);
+  }
+
+  #physio-signup-root .card h2 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    color: var(--teal-deep);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Identity card */
+  #physio-signup-root .identity-box {
+    background: #FAFBF9;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+  }
+  #physio-signup-root .identity-locked {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  #physio-signup-root .identity-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--teal);
+    color: #fff;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  #physio-signup-root .identity-text { flex: 1; min-width: 0; }
+  #physio-signup-root .identity-label { font-size: 12px; color: var(--ink-faint); }
+  #physio-signup-root .identity-name { font-weight: 600; font-size: 15px; color: var(--ink); }
+  #physio-signup-root .identity-change {
+    background: none; border: none; color: var(--teal);
+    font-size: 13px; text-decoration: underline; cursor: pointer; flex-shrink: 0;
+  }
+  #physio-signup-root .identity-edit-row { display: flex; gap: 8px; }
+  #physio-signup-root .identity-edit-row input,
+  #physio-signup-root .identity-edit-row select { flex: 1; }
+  #physio-signup-root .identity-custom-row { margin-top: 8px; }
+  #physio-signup-root .identity-confirm-btn {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    background: var(--teal);
+    color: #fff;
+    border: none;
+    padding: 0 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  #physio-signup-root .identity-confirm-btn:hover { background: var(--teal-deep); }
+  #physio-signup-root .identity-hint {
+    font-size: 12px; color: var(--ink-faint); margin-top: 6px;
+  }
+
+  #physio-signup-root .gate-hint {
+    font-size: 13.5px;
+    color: var(--coral-deep);
+    background: var(--coral-light);
+    border: 1px solid var(--coral-line);
+    padding: 9px 12px;
+    border-radius: 9px;
+    margin-bottom: 16px;
+  }
+
+  #physio-signup-root fieldset { border: none; padding: 0; margin: 0; }
+  #physio-signup-root fieldset:disabled { opacity: 0.45; }
+
+  #physio-signup-root .field { margin-bottom: 14px; }
+
+  #physio-signup-root label {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 5px;
+  }
+
+  #physio-signup-root input[type="text"],
+  #physio-signup-root input[type="date"],
+  #physio-signup-root input[type="month"],
+  #physio-signup-root select {
+    width: 100%;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14.5px;
+    padding: 9px 11px;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    background: #FBFCFA;
+    color: var(--ink);
+    outline-offset: 2px;
+  }
+  #physio-signup-root input:focus-visible,
+  #physio-signup-root select:focus-visible,
+  #physio-signup-root button:focus-visible {
+    outline: 2px solid var(--teal);
+  }
+  #physio-signup-root select:disabled, #physio-signup-root input:disabled {
+    opacity: 0.55; cursor: not-allowed;
+  }
+
+  /* Patient autocomplete */
+  #physio-signup-root .autocomplete-wrap { position: relative; }
+  #physio-signup-root .autocomplete-list {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0; right: 0;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(20,56,50,0.12);
+    max-height: 190px;
+    overflow-y: auto;
+    z-index: 30;
+  }
+  #physio-signup-root .autocomplete-list.show { display: block; }
+  #physio-signup-root .autocomplete-item {
+    padding: 9px 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  #physio-signup-root .autocomplete-item:hover,
+  #physio-signup-root .autocomplete-item.active { background: var(--teal-light); }
+  #physio-signup-root .autocomplete-hint {
+    font-size: 12px; color: var(--ink-faint); margin-top: 5px;
+  }
+
+  /* Day-type toggle buttons */
+  #physio-signup-root .dt-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  #physio-signup-root .dt-btn {
+    font-family: 'Sarabun', sans-serif;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: #FBFCFA;
+    color: var(--ink-soft);
+    padding: 9px 10px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 1.3;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  #physio-signup-root .dt-btn .dt-title { display: block; font-weight: 700; font-size: 14px; }
+  #physio-signup-root .dt-btn .dt-range { display: block; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; margin-top: 2px; opacity: 0.85; }
+  #physio-signup-root .dt-btn.weekday.active { background: var(--teal); border-color: var(--teal); color: #fff; }
+  #physio-signup-root .dt-btn.extended.active { background: var(--coral); border-color: var(--coral); color: #fff; }
+  #physio-signup-root .dt-btn:hover:not(.active) { border-color: var(--ink-faint); }
+
+  #physio-signup-root .daytype-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 999px;
+    margin: 2px 0 16px;
+  }
+  #physio-signup-root .daytype-badge.weekday { background: var(--teal-light); color: var(--teal-deep); }
+  #physio-signup-root .daytype-badge.extended { background: var(--coral-light); color: var(--coral-deep); }
+  #physio-signup-root .daytype-badge .dot { width: 7px; height: 7px; border-radius: 50%; }
+  #physio-signup-root .daytype-badge.weekday .dot { background: var(--teal); }
+  #physio-signup-root .daytype-badge.extended .dot { background: var(--coral); }
+
+  #physio-signup-root .submit-btn {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    background: var(--teal);
+    color: #fff;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 4px;
+    transition: background .15s ease, transform .1s ease;
+  }
+  #physio-signup-root .submit-btn:hover { background: var(--teal-deep); }
+  #physio-signup-root .submit-btn:active { transform: scale(0.99); }
+  #physio-signup-root .submit-btn:disabled { background: var(--ink-faint); cursor: not-allowed; }
+
+  #physio-signup-root .form-error {
+    color: var(--danger);
+    font-size: 13px;
+    margin-top: 8px;
+    display: none;
+  }
+  #physio-signup-root .form-error.show { display: block; }
+  #physio-signup-root .form-success {
+    color: var(--teal-deep);
+    font-size: 13px;
+    margin-top: 8px;
+    display: none;
+  }
+  #physio-signup-root .form-success.show { display: block; }
+
+  /* Signature time-track visual */
+  #physio-signup-root .track-card svg { width: 100%; height: auto; display: block; }
+  #physio-signup-root .track-legend {
+    display: flex; gap: 16px; margin-top: 12px; font-size: 12.5px; color: var(--ink-soft); flex-wrap: wrap;
+  }
+  #physio-signup-root .track-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  #physio-signup-root .track-legend .sw { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+  /* List section */
+  #physio-signup-root .list-section { margin-top: 26px; }
+  #physio-signup-root .list-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  #physio-signup-root .list-header-row h2 { margin: 0; }
+  #physio-signup-root .list-section h2 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--teal-deep);
+  }
+  #physio-signup-root .session-count {
+    font-size: 12.5px; color: var(--ink-faint); margin-bottom: 14px;
+  }
+  #physio-signup-root .toolbar-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  #physio-signup-root .toolbar-row input[type="month"] { width: auto; min-width: 150px; }
+  #physio-signup-root .toolbar-btn {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    border: none;
+    padding: 9px 14px;
+    border-radius: 9px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: filter .15s ease;
+  }
+  #physio-signup-root .toolbar-btn.export { background: var(--gold); color: #3B2A06; }
+  #physio-signup-root .toolbar-btn.import { background: #fff; color: var(--teal-deep); border: 1.5px solid var(--teal-line); }
+  #physio-signup-root .toolbar-btn:hover { filter: brightness(0.95); }
+
+  #physio-signup-root .date-group { margin-bottom: 18px; }
+  #physio-signup-root .date-group-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 8px;
+  }
+  #physio-signup-root .date-group-header .date-label {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    color: var(--ink);
+  }
+  #physio-signup-root .entry-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--teal);
+    border-radius: 10px;
+    padding: 11px 14px;
+    margin-bottom: 8px;
+  }
+  #physio-signup-root .entry-row.extended { border-left-color: var(--coral); }
+  #physio-signup-root .entry-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--teal-deep);
+    min-width: 108px;
+  }
+  #physio-signup-root .entry-row.extended .entry-time { color: var(--coral-deep); }
+  #physio-signup-root .entry-names { flex: 1; min-width: 0; font-size: 14px; }
+  #physio-signup-root .entry-names .therapist { font-weight: 600; }
+  #physio-signup-root .entry-names .arrow { color: var(--ink-faint); margin: 0 6px; }
+  #physio-signup-root .entry-del {
+    background: none; border: none; color: var(--ink-faint);
+    cursor: pointer; font-size: 13px; padding: 4px 8px; border-radius: 6px;
+    flex-shrink: 0;
+  }
+  #physio-signup-root .entry-del:hover { color: var(--danger); background: #FBEAE6; }
+
+  #physio-signup-root .empty-state {
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 14px;
+    padding: 30px 10px;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+  }
+
+  #physio-signup-root .footer-row {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+  #physio-signup-root .reset-link {
+    background: none; border: none; color: var(--ink-faint);
+    text-decoration: underline; cursor: pointer; font-size: 12px;
+  }
+  #physio-signup-root .reset-link:hover { color: var(--danger); }
+</style>
+
+<script src="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script>
+(function () {
+  const root = document.getElementById('physio-signup-root');
+
+  // ---------- Thai date helpers ----------
+  const THAI_DAYS = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
+  const THAI_DAYS_SHORT = ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'];
+  const THAI_MONTHS = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+
+  function parseLocalDate(dateStr) {
+    const [y, m, d] = dateStr.split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+
+  function formatThaiDateLong(dateStr) {
+    const dt = parseLocalDate(dateStr);
+    const be = dt.getFullYear() + 543;
+    return `วัน${THAI_DAYS[dt.getDay()]}ที่ ${dt.getDate()} ${THAI_MONTHS[dt.getMonth()]} ${be}`;
+  }
+
+  function formatThaiDateShort(dateStr) {
+    const dt = parseLocalDate(dateStr);
+    const be = dt.getFullYear() + 543;
+    return `${THAI_DAYS_SHORT[dt.getDay()]} ${dt.getDate()} ${THAI_MONTHS[dt.getMonth()].slice(0,3)} ${be}`;
+  }
+
+  function formatThaiDateNumeric(dateStr) {
+    const dt = parseLocalDate(dateStr);
+    const be = dt.getFullYear() + 543;
+    return `${String(dt.getDate()).padStart(2,'0')}/${String(dt.getMonth()+1).padStart(2,'0')}/${be}`;
+  }
+
+  function monthLabelThai(ym) {
+    const [y, m] = ym.split('-').map(Number);
+    const be = y + 543;
+    return `${THAI_MONTHS[m-1]} ${be}`;
+  }
+
+  function isWeekend(dateStr) {
+    const day = parseLocalDate(dateStr).getDay();
+    return day === 0 || day === 6;
+  }
+
+  // ---------- Physiotherapist roster ----------
+  const PHYSIO_ROSTER = [
+    'นางธัญพร ใยดี',
+    'น.ส. ยุภาพร สิงคร',
+    'นายณรงค์กรณ์ หล้าดวงดี',
+    'นางสาวปิยะธิดา สุรนารท',
+    'นางจุณธิดา โคลงฉันท์',
+    'น.ส. นุชราภรณ์ สุโพนอก',
+    'นายนครินทร์ แก้วบุตรดี'
+  ];
+
+  // ---------- Time window rules ----------
+  const RANGE_WEEKDAY = { start: '17:30', end: '21:00' };
+  const RANGE_EXTENDED = { start: '08:00', end: '20:00' };
+
+  function toMinutes(hhmm) {
+    const [h, m] = hhmm.split(':').map(Number);
+    return h * 60 + m;
+  }
+
+  function getRange(dayType) {
+    return dayType === 'extended' ? RANGE_EXTENDED : RANGE_WEEKDAY;
+  }
+
+  function todayStr() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+  function currentMonthStr() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+  }
+
+  // ---------- Markup ----------
+  root.innerHTML = `
+    <div class="wrap">
+      <p class="eyebrow">คลินิกกายภาพบำบัดเคลื่อนที่</p>
+      <h1>ตารางออกหน่วย</h1>
+      <p class="subtitle">เลือกชื่อของคุณ ติ๊กวันปกติหรือวันหยุด เลือกวันที่ แล้วพิมพ์ชื่อคนไข้ — วันปกติ 17:30–21:00 น. วันหยุด 08:00–20:00 น.</p>
+      <div class="workflow-note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h7l-1 8 11-13h-7l1-7z" fill="currentColor"/></svg>
+        <span><b>หน้านี้ไม่ได้บันทึกข้อมูลอัตโนมัติ</b> รายชื่อที่ลงจะอยู่แค่ระหว่างที่เปิดหน้านี้ทิ้งไว้ ถ้ามีไฟล์แผนเดิมอยู่แล้ว ให้กด "นำเข้าแผนเดิม" ก่อนเริ่มลงชื่อ พอลงครบแล้วกด "ดาวน์โหลดแผนเดือนนี้" เพื่อเก็บไฟล์ไว้และส่งต่อให้เพื่อนร่วมงานใช้ไฟล์เดียวกันต่อ</span>
+      </div>
+
+      <div class="top-grid">
+        <div class="card form-card">
+          <h2>ลงชื่อออกหน่วย</h2>
+
+          <div class="identity-box" id="ps-identity"></div>
+
+          <div class="gate-hint" id="ps-gate-hint" style="display:none;">เลือกชื่อของคุณด้านบนก่อน เพื่อเริ่มลงชื่อออกหน่วย</div>
+
+          <form id="ps-form">
+            <fieldset id="ps-fieldset">
+              <div class="field">
+                <label for="ps-patient">ชื่อคนไข้</label>
+                <div class="autocomplete-wrap">
+                  <input type="text" id="ps-patient" autocomplete="off" placeholder="พิมพ์ชื่อคนไข้" required />
+                  <div class="autocomplete-list" id="ps-patient-suggestions"></div>
+                </div>
+                <div class="autocomplete-hint">พิมพ์ไม่กี่ตัวอักษร ถ้าเคยลงชื่อคนไข้คนนี้ไว้ในรอบนี้แล้วจะมีให้เลือกด้านล่าง</div>
+              </div>
+              <div class="field">
+                <label for="ps-date">วันที่ออกหน่วย</label>
+                <input type="date" id="ps-date" required />
+              </div>
+              <div class="field">
+                <label>ประเภทวัน</label>
+                <div class="dt-toggle">
+                  <button type="button" class="dt-btn weekday" data-type="weekday">
+                    <span class="dt-title">วันปกติ</span>
+                    <span class="dt-range">17:30–21:00</span>
+                  </button>
+                  <button type="button" class="dt-btn extended" data-type="extended">
+                    <span class="dt-title">วันหยุด</span>
+                    <span class="dt-range">08:00–20:00</span>
+                  </button>
+                </div>
+              </div>
+              <div id="ps-badge"></div>
+              <button type="submit" class="submit-btn" id="ps-submit">ลงชื่อออกหน่วย</button>
+            </fieldset>
+            <div class="form-error" id="ps-error"></div>
+            <div class="form-success" id="ps-success"></div>
+          </form>
+        </div>
+
+        <div class="card track-card">
+          <h2>ช่วงเวลาที่อนุญาต</h2>
+          <div id="ps-track"></div>
+          <div class="track-legend">
+            <span><span class="sw" style="background:var(--teal-light); border:1px solid var(--teal-line);"></span>วันปกติ 17:30–21:00</span>
+            <span><span class="sw" style="background:var(--coral-light); border:1px solid var(--coral-line);"></span>วันหยุด 08:00–20:00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="list-section">
+        <div class="list-header-row">
+          <h2>รายการในรอบนี้</h2>
+          <div class="toolbar-row">
+            <button type="button" class="toolbar-btn import" id="ps-import-btn">นำเข้าแผนเดิม (Excel)</button>
+            <input type="file" id="ps-import-file" accept=".xlsx,.xls" style="display:none;" />
+            <input type="month" id="ps-export-month" />
+            <button type="button" class="toolbar-btn export" id="ps-export-btn">ดาวน์โหลดแผนเดือนนี้ (Excel)</button>
+          </div>
+        </div>
+        <div class="session-count" id="ps-session-count"></div>
+        <div id="ps-list"></div>
+      </div>
+
+      <div class="footer-row">
+        <span>ข้อมูลในรอบนี้จะหายไปเมื่อปิดหน้า — ดาวน์โหลดไฟล์ไว้ก่อนปิดเสมอ</span>
+        <button type="button" class="reset-link" id="ps-reset">ล้างรายการในรอบนี้</button>
+      </div>
+    </div>
+  `;
+
+  // ---------- Element refs ----------
+  const $identity = root.querySelector('#ps-identity');
+  const $gateHint = root.querySelector('#ps-gate-hint');
+  const $fieldset = root.querySelector('#ps-fieldset');
+  const $patient = root.querySelector('#ps-patient');
+  const $patientSuggestions = root.querySelector('#ps-patient-suggestions');
+  const $date = root.querySelector('#ps-date');
+  const $dtButtons = Array.from(root.querySelectorAll('.dt-btn'));
+  const $badge = root.querySelector('#ps-badge');
+  const $form = root.querySelector('#ps-form');
+  const $submit = root.querySelector('#ps-submit');
+  const $error = root.querySelector('#ps-error');
+  const $success = root.querySelector('#ps-success');
+  const $track = root.querySelector('#ps-track');
+  const $list = root.querySelector('#ps-list');
+  const $sessionCount = root.querySelector('#ps-session-count');
+  const $reset = root.querySelector('#ps-reset');
+  const $exportMonth = root.querySelector('#ps-export-month');
+  const $exportBtn = root.querySelector('#ps-export-btn');
+  const $importBtn = root.querySelector('#ps-import-btn');
+  const $importFile = root.querySelector('#ps-import-file');
+
+  let entries = [];
+  let savedTherapistName = null;
+  let isEditingIdentity = false;
+  let selectedDayType = 'weekday';
+  let patientNamesCache = [];
+
+  $date.value = todayStr();
+  $exportMonth.value = currentMonthStr();
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ---------- Identity (in-session only, no storage dependency) ----------
+  function initialsOf(name) {
+    const parts = name.trim().split(/\s+/);
+    return parts.length > 1 ? (parts[0][0] + parts[1][0]) : name.slice(0, 2);
+  }
+
+  function renderIdentity() {
+    if (!savedTherapistName || isEditingIdentity) {
+      const isKnown = savedTherapistName && PHYSIO_ROSTER.includes(savedTherapistName);
+      const isCustom = savedTherapistName && !isKnown;
+      $identity.innerHTML = `
+        <div class="identity-edit-row">
+          <select id="ps-identity-select">
+            <option value="" disabled ${!savedTherapistName ? 'selected' : ''}>-- เลือกชื่อของคุณ --</option>
+            ${PHYSIO_ROSTER.map(n => `<option value="${escapeHtml(n)}" ${savedTherapistName === n ? 'selected' : ''}>${escapeHtml(n)}</option>`).join('')}
+            <option value="__other__" ${isCustom ? 'selected' : ''}>อื่นๆ (พิมพ์ชื่อเอง)</option>
+          </select>
+          <button type="button" class="identity-confirm-btn" id="ps-identity-confirm">ใช้ชื่อนี้</button>
+        </div>
+        <div class="identity-custom-row" id="ps-identity-custom-row" style="display:${isCustom ? 'block' : 'none'};">
+          <input type="text" id="ps-identity-custom" placeholder="พิมพ์ชื่อ-นามสกุลของคุณ" value="${isCustom ? escapeHtml(savedTherapistName) : ''}" />
+        </div>
+        <div class="identity-hint">เลือกชื่อจากรายชื่อนักกายภาพบำบัด แล้วจะปลดล็อกให้ทันที (เลือกใหม่ทุกครั้งที่เปิดหน้านี้)</div>
+      `;
+      const $select = root.querySelector('#ps-identity-select');
+      const $customRow = root.querySelector('#ps-identity-custom-row');
+      const $custom = root.querySelector('#ps-identity-custom');
+      const $confirm = root.querySelector('#ps-identity-confirm');
+
+      function syncCustomVisibility() {
+        const showCustom = $select.value === '__other__';
+        $customRow.style.display = showCustom ? 'block' : 'none';
+        if (showCustom) $custom.focus();
+      }
+      if (!savedTherapistName) { $select.focus(); } else if (isCustom) { $custom.focus(); }
+
+      const applyName = (name) => {
+        if (!name) return;
+        savedTherapistName = name;
+        isEditingIdentity = false;
+        renderIdentity();
+        updateGate();
+      };
+
+      $select.addEventListener('change', () => {
+        syncCustomVisibility();
+        if ($select.value && $select.value !== '__other__') {
+          applyName($select.value);
+        }
+      });
+      $confirm.addEventListener('click', () => {
+        const name = $select.value === '__other__' ? $custom.value.trim() : $select.value;
+        if (!name) {
+          if ($select.value === '__other__') $custom.focus(); else $select.focus();
+          return;
+        }
+        applyName(name);
+      });
+      $custom.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        const name = $custom.value.trim();
+        if (!name) { $custom.focus(); return; }
+        applyName(name);
+      });
+    } else {
+      $identity.innerHTML = `
+        <div class="identity-locked">
+          <div class="identity-avatar">${escapeHtml(initialsOf(savedTherapistName))}</div>
+          <div class="identity-text">
+            <div class="identity-label">ลงชื่อออกหน่วยโดย</div>
+            <div class="identity-name">${escapeHtml(savedTherapistName)}</div>
+          </div>
+          <button type="button" class="identity-change" id="ps-identity-change">เปลี่ยนชื่อ</button>
+        </div>
+      `;
+      root.querySelector('#ps-identity-change').addEventListener('click', () => {
+        isEditingIdentity = true;
+        renderIdentity();
+      });
+    }
+  }
+
+  function updateGate() {
+    const ready = !!savedTherapistName;
+    $fieldset.disabled = !ready;
+    $gateHint.style.display = ready ? 'none' : 'block';
+  }
+
+  // ---------- Patient name autocomplete (in-session, mobile-friendly custom dropdown) ----------
+  function updatePatientCache() {
+    patientNamesCache = [...new Set(entries.map(e => e.patient))];
+  }
+
+  function renderSuggestions(query) {
+    const q = query.trim().toLowerCase();
+    if (!q) { hideSuggestions(); return; }
+    const matches = patientNamesCache
+      .filter(n => n.toLowerCase().includes(q) && n.toLowerCase() !== q)
+      .slice(0, 6);
+    if (!matches.length) { hideSuggestions(); return; }
+    $patientSuggestions.innerHTML = matches.map(n => `<div class="autocomplete-item" data-name="${escapeHtml(n)}">${escapeHtml(n)}</div>`).join('');
+    $patientSuggestions.classList.add('show');
+  }
+  function hideSuggestions() {
+    $patientSuggestions.classList.remove('show');
+    $patientSuggestions.innerHTML = '';
+  }
+
+  $patient.addEventListener('input', () => renderSuggestions($patient.value));
+  $patient.addEventListener('focus', () => renderSuggestions($patient.value));
+  $patient.addEventListener('blur', () => setTimeout(hideSuggestions, 150));
+  $patient.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideSuggestions(); });
+  $patientSuggestions.addEventListener('pointerdown', (e) => {
+    const item = e.target.closest('.autocomplete-item');
+    if (!item) return;
+    e.preventDefault();
+    $patient.value = item.getAttribute('data-name');
+    hideSuggestions();
+  });
+
+  // ---------- Time-track SVG (signature visual) ----------
+  function timeToX(hour, x0, x1) {
+    return x0 + (hour / 24) * (x1 - x0);
+  }
+
+  function renderTrack() {
+    const x0 = 56, x1 = 580;
+    const barW = 22;
+    const yWeekday = 26, yExtended = 88;
+
+    const wkX = timeToX(toMinutes(RANGE_WEEKDAY.start)/60, x0, x1);
+    const wkX2 = timeToX(toMinutes(RANGE_WEEKDAY.end)/60, x0, x1);
+    const exX = timeToX(toMinutes(RANGE_EXTENDED.start)/60, x0, x1);
+    const exX2 = timeToX(toMinutes(RANGE_EXTENDED.end)/60, x0, x1);
+
+    const wkActive = selectedDayType === 'weekday';
+    const exActive = selectedDayType === 'extended';
+
+    function checkBadge(cx, cy, color) {
+      return `<circle cx="${cx}" cy="${cy}" r="9" fill="${color}" />
+              <text x="${cx}" y="${cy+4}" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">&#10003;</text>`;
+    }
+
+    const ticks = [0,6,12,18,24].map(h => {
+      const x = timeToX(h, x0, x1);
+      return `<line x1="${x}" y1="120" x2="${x}" y2="126" stroke="var(--ink-faint)" stroke-width="1"/>
+              <text x="${x}" y="140" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--ink-faint)" text-anchor="middle">${String(h).padStart(2,'0')}:00</text>`;
+    }).join('');
+
+    $track.innerHTML = `
+      <svg viewBox="0 0 600 150" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="${yWeekday + barW/2 + 4}" font-family="Sarabun, sans-serif" font-size="11" font-weight="600" fill="var(--teal-deep)">จ.–ศ.</text>
+        <rect x="${x0}" y="${yWeekday}" width="${x1-x0}" height="${barW}" rx="6" fill="#EFF3EE" />
+        ${wkActive ? `<rect x="${wkX-3}" y="${yWeekday-3}" width="${wkX2-wkX+6}" height="${barW+6}" rx="9" fill="none" stroke="var(--teal)" stroke-width="2"/>` : ''}
+        <rect x="${wkX}" y="${yWeekday}" width="${wkX2-wkX}" height="${barW}" rx="6" fill="var(--teal-light)" stroke="var(--teal-line)" />
+        ${wkActive ? checkBadge(wkX2 - 14, yWeekday + barW/2, 'var(--teal)') : ''}
+
+        <text x="0" y="${yExtended + barW/2 + 4}" font-family="Sarabun, sans-serif" font-size="11" font-weight="600" fill="var(--coral-deep)">ส.–อา.</text>
+        <rect x="${x0}" y="${yExtended}" width="${x1-x0}" height="${barW}" rx="6" fill="#EFF3EE" />
+        ${exActive ? `<rect x="${exX-3}" y="${yExtended-3}" width="${exX2-exX+6}" height="${barW+6}" rx="9" fill="none" stroke="var(--coral)" stroke-width="2"/>` : ''}
+        <rect x="${exX}" y="${yExtended}" width="${exX2-exX}" height="${barW}" rx="6" fill="var(--coral-light)" stroke="var(--coral-line)" />
+        ${exActive ? checkBadge(exX2 - 14, yExtended + barW/2, 'var(--coral)') : ''}
+
+        ${ticks}
+      </svg>
+    `;
+  }
+
+  // ---------- Day type toggle ----------
+  function setDayType(type) {
+    selectedDayType = type;
+    $dtButtons.forEach(btn => {
+      const active = btn.getAttribute('data-type') === type;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    updateBadge();
+    renderTrack();
+  }
+
+  function updateBadge() {
+    const dateVal = $date.value;
+    $badge.innerHTML = dateVal ? `
+      <span class="daytype-badge ${selectedDayType}">
+        <span class="dot"></span>
+        ${formatThaiDateShort(dateVal)} · ${selectedDayType === 'extended' ? 'วันหยุด 08:00–20:00' : 'วันปกติ 17:30–21:00'}
+      </span>` : '';
+  }
+
+  $dtButtons.forEach(btn => {
+    btn.addEventListener('click', () => setDayType(btn.getAttribute('data-type')));
+  });
+
+  $date.addEventListener('change', () => {
+    setDayType(isWeekend($date.value) ? 'extended' : 'weekday');
+  });
+
+  // ---------- List rendering ----------
+  function renderList() {
+    $sessionCount.textContent = entries.length
+      ? `มี ${entries.length} รายการในรอบนี้ (อย่าลืมดาวน์โหลดไฟล์ก่อนปิดหน้า)`
+      : 'ยังไม่มีรายการในรอบนี้';
+
+    if (!entries.length) {
+      $list.innerHTML = `<div class="empty-state">ยังไม่มีรายการลงชื่อออกหน่วยในรอบนี้ ลงชื่อคนแรกได้เลย หรือกด "นำเข้าแผนเดิม" ถ้ามีไฟล์อยู่แล้ว</div>`;
+      return;
+    }
+    const sorted = [...entries].sort((a, b) => {
+      if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+      return toMinutes(a.start) - toMinutes(b.start);
+    });
+    const groups = {};
+    sorted.forEach(e => {
+      if (!groups[e.date]) groups[e.date] = [];
+      groups[e.date].push(e);
+    });
+
+    $list.innerHTML = Object.keys(groups).map(date => {
+      const dayType = groups[date][0].dayType === 'extended' ? 'extended' : 'weekday';
+      const rows = groups[date].map(e => `
+        <div class="entry-row ${e.dayType === 'extended' ? 'extended' : ''}" data-id="${e.id}">
+          <div class="entry-time">${e.start}–${e.end}</div>
+          <div class="entry-names">
+            <span class="therapist">${escapeHtml(e.therapist)}</span>
+            <span class="arrow">→</span>
+            <span class="patient">${escapeHtml(e.patient)}</span>
+          </div>
+          <button type="button" class="entry-del" data-del="${e.id}">ลบ</button>
+        </div>
+      `).join('');
+      return `
+        <div class="date-group">
+          <div class="date-group-header">
+            <span class="date-label">${formatThaiDateLong(date)}</span>
+            <span class="daytype-badge ${dayType}" style="margin:0;"><span class="dot"></span>${dayType === 'extended' ? 'วันหยุด' : 'วันปกติ'}</span>
+          </div>
+          ${rows}
+        </div>
+      `;
+    }).join('');
+
+    $list.querySelectorAll('[data-del]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-del');
+        if (!confirm('ยืนยันการลบรายการนี้หรือไม่?')) return;
+        entries = entries.filter(e => e.id !== id);
+        updatePatientCache();
+        renderList();
+      });
+    });
+  }
+
+  // ---------- Submit (in-memory, instant) ----------
+  $form.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    $error.classList.remove('show');
+    $success.classList.remove('show');
+
+    if (!savedTherapistName) {
+      $error.textContent = 'กรุณาเลือกชื่อของคุณก่อน';
+      $error.classList.add('show');
+      return;
+    }
+
+    const patient = $patient.value.trim();
+    const date = $date.value;
+    if (!patient || !date) {
+      $error.textContent = 'กรุณากรอกข้อมูลให้ครบทุกช่อง';
+      $error.classList.add('show');
+      return;
+    }
+
+    const range = getRange(selectedDayType);
+    const entry = {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
+      therapist: savedTherapistName, patient, date,
+      start: range.start, end: range.end,
+      dayType: selectedDayType,
+      createdAt: new Date().toISOString()
+    };
+
+    entries.push(entry);
+    updatePatientCache();
+    renderList();
+    hideSuggestions();
+
+    $success.textContent = `ลงชื่อ "${patient}" เรียบร้อย`;
+    $success.classList.add('show');
+    $patient.value = '';
+    $patient.focus();
+  });
+
+  $reset.addEventListener('click', () => {
+    if (!entries.length) return;
+    if (!confirm('ล้างรายการทั้งหมดในรอบนี้หรือไม่? (ถ้ายังไม่ได้ดาวน์โหลดไฟล์ไว้ ข้อมูลจะหายไปถาวร)')) return;
+    entries = [];
+    updatePatientCache();
+    renderList();
+  });
+
+  // ---------- Excel export (monthly plan) ----------
+  $exportBtn.addEventListener('click', () => {
+    const ym = $exportMonth.value;
+    if (!ym) { alert('กรุณาเลือกเดือนที่ต้องการ'); return; }
+    if (typeof XLSX === 'undefined') { alert('ไม่สามารถโหลดตัวสร้างไฟล์ Excel ได้ ลองรีเฟรชหน้านี้แล้วลองใหม่'); return; }
+
+    const monthEntries = entries
+      .filter(e => e.date.startsWith(ym))
+      .sort((a, b) => {
+        if (a.date !== b.date) return a.date < b.date ? -1 : 1;
+        return a.therapist.localeCompare(b.therapist, 'th');
+      });
+
+    if (!monthEntries.length) {
+      alert('ไม่มีรายการลงชื่อออกหน่วยในเดือนที่เลือก (รวมไฟล์ที่นำเข้าด้วย)');
+      return;
+    }
+
+    const titleRow = [`แผนออกหน่วยกายภาพบำบัด เดือน${monthLabelThai(ym)}`];
+    const header = ['วันที่', 'วัน', 'ประเภทวัน', 'ช่วงเวลา', 'นักกายภาพบำบัด', 'ชื่อคนไข้'];
+    const rows = monthEntries.map(e => [
+      formatThaiDateNumeric(e.date),
+      THAI_DAYS_SHORT[parseLocalDate(e.date).getDay()],
+      e.dayType === 'extended' ? 'วันหยุด' : 'วันปกติ',
+      `${e.start}–${e.end} น.`,
+      e.therapist,
+      e.patient
+    ]);
+
+    const aoa = [titleRow, [], header, ...rows];
+
+    try {
+      const ws = XLSX.utils.aoa_to_sheet(aoa);
+      ws['!cols'] = [{ wch: 13 }, { wch: 7 }, { wch: 10 }, { wch: 15 }, { wch: 24 }, { wch: 24 }];
+      ws['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: 5 } }];
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'แผนออกหน่วย');
+      XLSX.writeFile(wb, `แผนออกหน่วย_${ym}.xlsx`);
+    } catch (e) {
+      alert('สร้างไฟล์ Excel ไม่สำเร็จ กรุณาลองใหม่');
+    }
+  });
+
+  // ---------- Excel import (continue from a previously downloaded plan) ----------
+  $importBtn.addEventListener('click', () => $importFile.click());
+
+  $importFile.addEventListener('change', async (ev) => {
+    const file = ev.target.files && ev.target.files[0];
+    ev.target.value = '';
+    if (!file) return;
+    if (typeof XLSX === 'undefined') { alert('ไม่สามารถโหลดตัวอ่านไฟล์ Excel ได้ ลองรีเฟรชหน้านี้แล้วลองใหม่'); return; }
+
+    try {
+      const buf = await file.arrayBuffer();
+      const wb = XLSX.read(buf, { type: 'array' });
+      const sheet = wb.Sheets[wb.SheetNames[0]];
+      const aoa = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: false });
+
+      const headerIdx = aoa.findIndex(r => Array.isArray(r) && r[0] === 'วันที่');
+      if (headerIdx === -1) throw new Error('ไม่พบหัวตาราง "วันที่" — ไฟล์นี้อาจไม่ใช่ไฟล์ที่ดาวน์โหลดจากหน้านี้');
+
+      let imported = 0, skipped = 0;
+      for (let i = headerIdx + 1; i < aoa.length; i++) {
+        const row = aoa[i];
+        if (!row || !row[0]) continue;
+        const [dateRaw, , dayTypeLabel, timeRangeRaw, therapistRaw, patientRaw] = row;
+
+        const dateParts = String(dateRaw).trim().split('/');
+        if (dateParts.length !== 3) { skipped++; continue; }
+        const dd = parseInt(dateParts[0], 10);
+        const mm = parseInt(dateParts[1], 10);
+        const beYear = parseInt(dateParts[2], 10);
+        if (!dd || !mm || !beYear) { skipped++; continue; }
+        const gYear = beYear > 2400 ? beYear - 543 : beYear;
+        const dateISO = `${gYear}-${String(mm).padStart(2,'0')}-${String(dd).padStart(2,'0')}`;
+
+        const dayType = String(dayTypeLabel).trim() === 'วันหยุด' ? 'extended' : 'weekday';
+        const range = getRange(dayType);
+        const timeParts = String(timeRangeRaw).replace('น.', '').trim().split(/[\u2013-]/).map(s => s.trim());
+        const start = timeParts[0] || range.start;
+        const end = timeParts[1] || range.end;
+
+        const therapist = String(therapistRaw || '').trim();
+        const patient = String(patientRaw || '').trim();
+        if (!therapist || !patient) { skipped++; continue; }
+
+        const dup = entries.some(e => e.date === dateISO && e.therapist === therapist && e.patient === patient && e.start === start);
+        if (dup) { skipped++; continue; }
+
+        entries.push({
+          id: `imp-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
+          therapist, patient, date: dateISO, start, end, dayType,
+          createdAt: new Date().toISOString()
+        });
+        imported++;
+      }
+
+      updatePatientCache();
+      renderList();
+      alert(`นำเข้าสำเร็จ ${imported} รายการ${skipped ? ` (ข้ามรายการที่ซ้ำหรืออ่านไม่ได้ ${skipped} รายการ)` : ''}`);
+    } catch (e) {
+      alert(`นำเข้าไฟล์ไม่สำเร็จ: ${e && e.message ? e.message : 'ไฟล์ไม่ถูกต้อง'}`);
+    }
+  });
+
+  // ---------- Init ----------
+  setDayType(isWeekend($date.value) ? 'extended' : 'weekday');
+  renderIdentity();
+  updateGate();
+  renderList();
+})();
+</script>
